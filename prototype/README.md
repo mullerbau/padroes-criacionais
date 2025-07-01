@@ -1,29 +1,77 @@
-# Prototype
+# Padrão de Projeto: Prototype
 
-## **Prototype:**
+O **Prototype** é um padrão de projeto criacional que permite a cópia ou "clonagem" de objetos existentes, sem que o código que faz a cópia precise conhecer as classes específicas desses objetos.
 
-A intenção do prototype, é copiar objetos existentes, sem ter uma dependência adicional de suas classes. Além de ter várias outras vantagens em usar esse pattern, o prototype ajuda também a ter um melhor encapsulamento dentro do código, já que clona o objeto original, para ele não precisar ser acessado a todo momento.
+Isso reduz dependências e melhora o encapsulamento, já que o objeto original não precisa ser exposto ou modificado a todo momento; em vez disso, trabalhamos com seus clones.
 
-## **Como ele faz isso?**
+---
 
-O Prototype é implementado criando um construtor que recebe o próprio objeto como parâmetro, herdando e "copiando" seus dados para um novo objeto. A partir desse clone, conseguimos criar novas classes sem interferir no objeto original, tornando o código mais seguro, simples e com melhor encapsulamento.
+## Como ele faz isso?
 
- 
+O padrão funciona definindo um método **`clone()`** no objeto que servirá como protótipo.
 
-## **Exemplo de código:** 
+Quando um novo objeto é necessário, em vez de criá-lo do zero (com o operador `new`), simplesmente chamamos o método **`clone()`** do protótipo. Este método é responsável por criar uma nova instância e copiar os dados do objeto original para a nova.
 
-```
-function exemploSemPadrao(int):
-    return int;
-```
+Assim, o clone nasce com o mesmo estado do original, pronto para ser usado ou modificado de forma independente.
 
-```
-function exemploComPadrao(num):
-    return num;
-```
+---
 
+## Exemplo de código:
 
-**Sem o padrão**, mostrar um código com Getters e Setters para acessar uma classe privada, na intenção de ‘copiar’ a classe existente.
+Este exemplo em **Java** mostra a implementação clássica usando a interface `Cloneable` em uma classe `Carro`.
 
-**Com o padrão**, dar o exemplo de criação de uma nova classe, com o parâmetro da classe que deseja copiar
+```java
+// 1. A classe protótipo deve implementar a interface Cloneable
+class Carro implements Cloneable {
+    private String modelo;
+    private String cor;
 
+    public Carro(String modelo, String cor) {
+        this.modelo = modelo;
+        this.cor = cor;
+    }
+
+    // Métodos para modificar os dados dos clones
+    public void setModelo(String modelo) { this.modelo = modelo; }
+    public void setCor(String cor) { this.cor = cor; }
+
+    @Override
+    public String toString() {
+        return "Carro[modelo=" + modelo + ", cor=" + cor + "]";
+    }
+
+    // 2. Sobrescrevemos o método clone() para que seja público
+    @Override
+    public Carro clone() {
+        try {
+            // super.clone() faz a cópia do objeto
+            return (Carro) super.clone();
+        } catch (CloneNotSupportedException e) {
+            // Não deve acontecer se a classe implementa Cloneable
+            return null;
+        }
+    }
+}
+
+// 3. Cliente que utiliza o padrão
+public class Main {
+    public static void main(String[] args) {
+        // A criação original acontece apenas uma vez
+        Carro prototipo = new Carro("Sedan Genérico", "preto");
+        System.out.println("Protótipo Original Criado: " + prototipo);
+
+        System.out.println("\n--- Usando clones a partir do protótipo ---");
+
+        // Os clones são criados de forma rápida, sem chamar o construtor
+        Carro carroDoJoao = prototipo.clone();
+        carroDoJoao.setCor("azul"); // Modificamos apenas o clone
+
+        Carro carroDaMaria = prototipo.clone();
+        carroDaMaria.setModelo("Hatch Esportivo");
+        carroDaMaria.setCor("vermelho"); // Modificamos apenas o clone
+
+        System.out.println("Clone 1 (modificado): " + carroDoJoao);
+        System.out.println("Clone 2 (modificado): " + carroDaMaria);
+        System.out.println("Protótipo Original (inalterado): " + prototipo);
+    }
+}

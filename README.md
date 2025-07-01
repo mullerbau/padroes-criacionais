@@ -38,6 +38,6 @@ Reutilizar padrões de projeto ajuda a evitar problemas sutis que causam problem
 
 Padrões criacionais escolhidos:
  - Eric - Prototype
- - João Pedro -
- - Felipe - 
- - Derek - 
+ - João Pedro - Builder
+ - Felipe - Factory Method
+ - Derek - Abstract Factory
