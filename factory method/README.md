@@ -1,12 +1,19 @@
-# Factory Method
+# 🏭 Padrão de Projeto: Factory Method
 
-**Factory Method:**
+## 📚 O que é?
+O **Factory Method** é um **padrão de projeto criacional** que define um método para criar objetos, permitindo que as **subclasses escolham qual classe concreta será instanciada**.
 
-A intenção do Factory Method é delegar a criação de objetos para subclasses, ao invés de instanciar diretamente no código com `new`. Dessa forma, o código fica mais flexível, desacoplado e preparado para futuras mudanças ou expansões.
-Além disso, o uso desse padrão melhora a organização e o encapsulamento, pois o código principal não precisa conhecer os detalhes das classes concretas que estão sendo criadas.
+Ele evita que o **código cliente** fique responsável por instanciar objetos diretamente.
 
+---
 
-**Como ele faz isso?**
+## 💡 Problema sem Factory Method
 
-O Factory Method funciona ao criar uma **classe abstrata ou interface** que define um método para criar objetos. As subclasses concretas implementam esse método, decidindo qual objeto exatamente será criado.
-Dessa forma, o código principal só chama o método da fábrica e recebe o objeto pronto, sem precisar saber o que está sendo instanciado diretamente.
+O código cliente precisa conhecer as classes concretas e decidir qual objeto criar, gerando **acoplamento** e **dificuldade de manutenção**.
+
+```typescript
+if (tipo === "cartao") {
+  pagamento = new PagamentoCartao();
+} else if (tipo === "boleto") {
+  pagamento = new PagamentoBoleto();
+}
