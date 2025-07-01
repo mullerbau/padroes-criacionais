@@ -22,6 +22,18 @@ if (tipo === "cartao") {
 
 ## ✅ Solução com Factory Method
 
+```typescript
+abstract class PagamentoFactory {
+  abstract criarPagamento(): Pagamento;
+}
+
+class PagamentoCartaoFactory extends PagamentoFactory {
+  criarPagamento(): Pagamento {
+    return new PagamentoCartao();
+  }
+}
+```
+
 Centraliza a criação dos objetos em um método especializado, deixando o código cliente desacoplado.
 
 O código cliente só usa o método de criação e não precisa conhecer as classes concretas.
