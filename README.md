@@ -41,3 +41,8 @@ Padrões criacionais escolhidos:
  - João Pedro - Builder
  - Felipe - Factory Method
  - Derek - Abstract Factory
+
+
+ # LINK PARA O VÍDEO
+
+[Vídeo do trabalho](https://drive.google.com/file/d/1SC3dD7Xq6Fja7p-_KuR_8RZ3iA_rilxy/view?usp=drive_link)
