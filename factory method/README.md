@@ -18,6 +18,7 @@ if (tipo === "cartao") {
 } else if (tipo === "boleto") {
   pagamento = new PagamentoBoleto();
 }
+```
 
 ## ✅ Solução com Factory Method
 
