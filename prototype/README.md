@@ -18,7 +18,7 @@ Assim, o clone nasce com o mesmo estado do original, pronto para ser usado ou mo
 
 ## Exemplo de código:
 
-Este exemplo em **Java** mostra a implementação clássica usando a interface `Cloneable` em uma classe `Carro`.
+Este exemplo em **Java** mostra a implementação clássica usando a interface `Cloneable` em uma classe `Inimigo`.
 
 ```java
 
